@@ -1,0 +1,30 @@
+name: Run yt-dlp and ffmpeg manually
+
+on:
+ workflow_dispatch: {}
+
+jobs:
+  run-yt-dlp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install Python 3 and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install python3 -y
+          pip install yt-dlp
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install ffmpeg -y
+      - name: Download video
+        run: |
+          ffmpeg -y -i `yt-dlp -g https://www.youtube.com/watch?v=h4LV2viNHmk` -vframes 1 capture.jpg
+      - name: Commit changes
+        run: |
+          git config --global user.email "info@thawaf.id"
+          git config --global user.name "lontarlab"
+          git add .
+          git commit -m "[Action] update capture.jpg"
+          git push origin development
