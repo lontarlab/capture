@@ -27,4 +27,4 @@ jobs:
           git config --global user.name "lontarlab"
           git add .
           git commit -m "[Action] update capture.jpg"
-          git push origin development
+          git push origin master
