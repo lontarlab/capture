@@ -1,7 +1,8 @@
-name: Run yt-dlp and ffmpeg manually
+name: Run yt-dlp and ffmpeg
 
 on:
- workflow_dispatch: {}
+  schedule:
+    - cron: '*/10 * * * *'
 
 jobs:
   run-yt-dlp:
